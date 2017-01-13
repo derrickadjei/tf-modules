@@ -1,6 +1,6 @@
-variable "environment" {
-  default = ""
-}
+#variable "environment" {
+#  default = ""
+#}
 
 variable "aws_region" {
   description = "aws region"
@@ -20,7 +20,19 @@ variable "az" {
   }
 }
 
-variable "environment" {
+variable "env" {
+  default = ""
+}
+
+variable "security" {
+  default = ""
+}
+
+variable "product" {
+  default = ""
+}
+
+variable "name" {
   default = ""
 }
 
