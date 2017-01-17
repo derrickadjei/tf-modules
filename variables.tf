@@ -2,6 +2,84 @@
 #  default = ""
 #}
 
+#######################################################
+
+#vpc
+
+
+variable "main_vpc_cidr" {
+  default = ""
+}
+
+variable "main_public_subnet" {
+  default = ""
+}
+
+variable "main_private_subnet" {
+  default = ""
+}
+
+variable "main_availability_zone" {
+  default = ""
+}
+
+variable "main_vpc_id" {
+  default = ""
+}
+
+variable "main_secure_cidr" {
+  default = ""
+}
+variable "aws_region" {
+  default = ""
+}
+
+
+
+####################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 variable "aws_region" {
   description = "aws region"
   default = "eu-west-1"
