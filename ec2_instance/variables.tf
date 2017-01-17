@@ -18,3 +18,7 @@ variable "ami" {
 variable "security_groups" {
   default = ""
 }
+
+variable "aws_region" {
+  default = "eu-west-1"
+}
