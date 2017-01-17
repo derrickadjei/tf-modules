@@ -34,6 +34,9 @@ variable "aws_region" {
   default = ""
 }
 
+variable "ami" {
+  default = ""
+}
 
 
 ####################################################

@@ -1,24 +1,27 @@
-variable "az" {
+variable "az_a" {
   description = "ec2 availability zone"
   default = "eu-west-1a"
 }
-
-variable "count" {
-  default = ""
+variable "az_b" {
+  description = "ec2 availability zone"
+  default = "eu-west-1a"
 }
-
-variable "instance_type" {
-  default = ""
+variable "az_c" {
+  description = "ec2 availability zone"
+  default = "eu-west-1a"
 }
-
+variable "aws_key_name" {
+  default = "comicrelief"
+}
 variable "ami" {
   default = ""
 }
-
-variable "security_groups" {
+variable "environment" {
   default = ""
 }
-
-variable "aws_region" {
-  default = "eu-west-1"
+variable "instance_type" {
+  default = ""
+}
+variable "count" {
+  default = 1
 }
