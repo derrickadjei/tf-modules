@@ -1,5 +1,5 @@
-resource "aws_security_group" "rnd17-web" {
-  name = "rnd17-web-${var.environment}"
+resource "aws_security_group" "name" {
+  name = "name-${var.environment}"
   description = "Manage connections to the webservers"
 
   ingress {
