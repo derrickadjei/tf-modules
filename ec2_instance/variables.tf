@@ -11,7 +11,7 @@ variable "az_c" {
   default = "eu-west-1a"
 }
 variable "aws_key_name" {
-  default = "comicrelief"
+  default = "name"
 }
 variable "ami" {
   default = ""
