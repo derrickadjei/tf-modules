@@ -6,13 +6,13 @@ resource "aws_security_group" "name" {
     from_port = 22
     to_port = 22
     protocol = "tcp"
-    cidr_blocks = ["${consul_keys.env.var.secure_cidr}","${consul_keys.env.var.mgmt_vpc_cidr}", "${var.cr_lan_ip}", "${consul_keys.env.var.vpc_cidr}" ]
+    cidr_blocks = ["${var.secure_cidr}","${var.mgmt_vpc_cidr}", "${var.cr_lan_ip}", "${var.vpc_cidr}" ]
   }
   ingress {
     from_port = 80
     to_port = 80
     protocol = "tcp"
-    cidr_blocks = ["${consul_keys.env.var.secure_cidr}","${consul_keys.env.var.mgmt_vpc_cidr}", "${consul_keys.env.var.vpc_cidr}", "${var.cr_lan_ip}"]
+    cidr_blocks = ["${var.secure_cidr}","${var.mgmt_vpc_cidr}", "${var.vpc_cidr}", "${var.cr_lan_ip}"]
   }
   ingress {
     from_port = 24007
@@ -36,13 +36,13 @@ resource "aws_security_group" "name" {
     from_port = 8300
     to_port = 8301
     protocol = "tcp"
-    cidr_blocks = ["${consul_keys.env.var.vpc_cidr}"]
+    cidr_blocks = ["${var.vpc_cidr}"]
   }
   ingress {
     from_port = 8300
     to_port = 8301
     protocol = "udp"
-    cidr_blocks = ["${consul_keys.env.var.vpc_cidr}"]
+    cidr_blocks = ["${var.vpc_cidr}"]
   }
   ingress {
     from_port = 2049
