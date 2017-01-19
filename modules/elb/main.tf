@@ -1,5 +1,5 @@
 resource "aws_elb" "rnd17-elb" {
-  name = "rnd17-elb-${var.environment}"
+  name = "rnd17-elb-${var.name}"
   subnets = ["${consul_keys.env.var.eu-west-1a-public}", "${consul_keys.env.var.eu-west-1b-public}", "${consul_keys.env.var.eu-west-1c-public}"]
   security_groups = ["${aws_security_group.rnd17-elb.id}"]
   internal = false
@@ -15,7 +15,7 @@ resource "aws_elb" "rnd17-elb" {
     instance_protocol = "http"
     lb_port = 443
     lb_protocol = "https"
-    ssl_certificate_id = "${consul_keys.env.var.ssl_cert_id}"
+    ssl_certificate_id = "${var.ssl_cert_id}"
   }
 
   health_check {
