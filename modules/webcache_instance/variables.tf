@@ -17,3 +17,10 @@ variable "aws_key_name" {
 variable "subnet_id" {
   default = ""
 }
+
+variable "name" {
+  default = ""
+}
+variable "env" {
+  default = ""
+}
