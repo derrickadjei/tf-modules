@@ -21,6 +21,15 @@ variable "subnet_id" {
 variable "name" {
   default = ""
 }
+
+variable "class" {
+  default = ""
+}
+
+variable "product" {
+  default = ""
+}
+
 variable "env" {
   default = ""
 }
