@@ -10,7 +10,7 @@ variable "instance_size" {
   default = ""
 }
 
-variable "aws_key_name" {
+variable "key_name" {
   default = ""
 }
 
