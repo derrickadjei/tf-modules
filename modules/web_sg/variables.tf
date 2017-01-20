@@ -22,3 +22,7 @@ variable "cr_lan_ip" {
 variable "vpc_cidr" {
   default = ""
 }
+
+variable "env" {
+  default = ""
+}
