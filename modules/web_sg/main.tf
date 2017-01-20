@@ -3,7 +3,7 @@ resource "aws_security_group" "name" {
   description = "Manage connections to the webservers"
   vpc_id = "${var.vpc_id}"
   tags {
-    Env = "${var.environment}"
+    Env = "${var.env}"
     Class = "securitygroup"
   }
 
