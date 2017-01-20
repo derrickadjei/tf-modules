@@ -1,9 +1,9 @@
 resource "aws_security_group" "rnd17-search" {
-  name = "rnd17-search-${var.environment}"
+  name = "rnd17-search-${var.name}"
   description = "Manage connections to search instances"
-  vpc_id = "${consul_keys.env.var.vpc_id}"
+  vpc_id = "${var.vpc_id}"
   tags {
-    Env = "${var.environment}"
+    Env = "${var.env}"
     Class = "securitygroup"
   }
 
@@ -11,25 +11,25 @@ resource "aws_security_group" "rnd17-search" {
     from_port = 22
     to_port = 22
     protocol = "tcp"
-    cidr_blocks = ["${consul_keys.env.var.secure_cidr}","${consul_keys.env.var.mgmt_vpc_cidr}", "${var.cr_lan_ip}"]
+    cidr_blocks = ["${var.secure_cidr}","${var.mgmt_vpc_cidr}", "${var.cr_lan_ip}"]
   }
   ingress {
     from_port = 8080
     to_port = 8080
     protocol = "tcp"
-    cidr_blocks = ["${consul_keys.env.var.vpc_cidr}","${consul_keys.env.var.secure_cidr}","${var.cr_lan_ip}"]
+    cidr_blocks = ["${var.vpc_cidr}","${var.secure_cidr}","${var.cr_lan_ip}"]
   }
   ingress {
     from_port = 8300
     to_port = 8301
     protocol = "tcp"
-    cidr_blocks = ["${consul_keys.env.var.vpc_cidr}"]
+    cidr_blocks = ["${var.vpc_cidr}"]
   }
   ingress {
     from_port = 8300
     to_port = 8301
     protocol = "udp"
-    cidr_blocks = ["${consul_keys.env.var.vpc_cidr}"]
+    cidr_blocks = ["${var.vpc_cidr}"]
   }
   egress {
     from_port = 0
