@@ -33,3 +33,7 @@ variable "product" {
 variable "env" {
   default = ""
 }
+
+variable "availability_zone" {
+  default = "eu-west-1"
+}

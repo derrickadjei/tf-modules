@@ -5,7 +5,7 @@ module "security_group" {
 
 resource "aws_instance" "name" {
   ami = "${var.ami}"
-  availability_zone = "eu-west-1a"
+  availability_zone = "${var.availability_zone}"
   count = "${var.webcache_count}"
   instance_type = "${var.instance_size}"
   key_name = "${var.key_name}"
