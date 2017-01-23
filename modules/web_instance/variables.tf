@@ -3,11 +3,11 @@ variable "ami" {
 }
 
 variable "webcache_count" {
-  default = ""
+  default = "1"
 }
 
 variable "instance_type" {
-  default = "t2.micro"
+  default = ""
 }
 
 variable "key_name" {
