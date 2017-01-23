@@ -6,7 +6,7 @@ variable "webcache_count" {
   default = ""
 }
 
-variable "instance_size" {
+variable "instance_type" {
   default = ""
 }
 
