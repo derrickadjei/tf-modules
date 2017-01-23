@@ -7,7 +7,7 @@ variable "webcache_count" {
 }
 
 variable "instance_type" {
-  default = ""
+  default = "t2.micro"
 }
 
 variable "key_name" {
