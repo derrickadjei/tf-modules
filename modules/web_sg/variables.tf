@@ -8,15 +8,15 @@ variable "vpc_id" {
 }
 
 variable "secure_cidr" {
-  default = ""
+  default = "0.0.0.0/0"
 }
 
 variable "mgmt_vpc_cidr" {
-  default = ""
+  default = "0.0.0.0/0"
 }
 
 variable "cr_lan_ip" {
-  default = ""
+  default = "0.0.0.0/0"
 }
 
 variable "vpc_cidr" {
