@@ -1,5 +1,5 @@
 variable "security_group_name" {
-  default = "test-web"
+  default = ""
 }
 
 variable "vpc_id" {
