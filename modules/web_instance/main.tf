@@ -12,7 +12,7 @@ resource "aws_instance" "name" {
   security_groups = ["${module.security_group.security_group_id_web}"]
   subnet_id = "${var.subnet_id}"
   tags {
-    name = "rnd17-webcache-${var.name}"
+    name = "test-${var.name}"
     class = "webcache"
     product = "rnd17"
     env = "${var.env}"
