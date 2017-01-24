@@ -1,5 +1,5 @@
 resource "aws_security_group" "test-web" {
-  name = "name-${var.security_group_name}"
+  name = "${var.security_group_name}"
   description = "Manage connections to the webservers"
   vpc_id = "${var.vpc_id}"
   tags {
