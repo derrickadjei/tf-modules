@@ -20,7 +20,7 @@ variable "cr_lan_ip" {
 }
 
 variable "vpc_cidr" {
-  default = ""
+  default = "0.0.0.0/0"
 }
 
 variable "env" {
