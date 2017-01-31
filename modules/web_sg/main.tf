@@ -1,3 +1,17 @@
+
+module "consul" {
+  source = " ansible-playbook-test/tf/testmain.tf/"
+
+  vpc_id = "${consul_keys.env.var.vpc_id}"
+  secure_cidr = "${consul_keys.env.var.secure_cidr}"
+  mgmt_vpc_cidr = "${consul_keys.env.var.mgmt_vpc_cidr}"
+  cr_lan_ip = "${var.cr_lan_ip}"
+  vpc_cidr = "${consul_keys.env.var.vpc_cidr}"
+}
+
+
+
+
 resource "aws_security_group" "test-web" {
   name = "${var.security_group_name}"
   description = "Manage connections to the webservers"
@@ -11,13 +25,13 @@ resource "aws_security_group" "test-web" {
     from_port = 22
     to_port = 22
     protocol = "tcp"
-    cidr_blocks = ["${var.secure_cidr}","${var.mgmt_vpc_cidr}", "${var.cr_lan_ip}", "${var.vpc_cidr}" ]
+    cidr_blocks = ["${module.consul.var.secure_cidr}","${module.consul.var.mgmt_vpc_cidr}", "${module.consul.var.cr_lan_ip}", "${module.consul.var.vpc_cidr}" ]
   }
   ingress {
     from_port = 80
     to_port = 80
     protocol = "tcp"
-    cidr_blocks = ["${var.secure_cidr}","${var.mgmt_vpc_cidr}", "${var.vpc_cidr}", "${var.cr_lan_ip}"]
+    cidr_blocks = ["${module.consul.var.secure_cidr}","${module.consul.var.mgmt_vpc_cidr}", "${module.consul.var.vpc_cidr}", "${module.consul.var.cr_lan_ip}"]
   }
   ingress {
     from_port = 24007
@@ -41,13 +55,13 @@ resource "aws_security_group" "test-web" {
     from_port = 8300
     to_port = 8301
     protocol = "tcp"
-    cidr_blocks = ["${var.vpc_cidr}"]
+    cidr_blocks = ["${module.consul.var.vpc_cidr}"]
   }
   ingress {
     from_port = 8300
     to_port = 8301
     protocol = "udp"
-    cidr_blocks = ["${var.vpc_cidr}"]
+    cidr_blocks = ["${module.consul.var.vpc_cidr}"]
   }
   ingress {
     from_port = 2049
