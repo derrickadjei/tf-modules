@@ -1,6 +1,6 @@
 
 module "consul" {
-  source = " ansible-playbook-test/tf/testmain.tf/"
+  source = "github.com/comicrelief/ansible-playbook-test/tf/"
 
   vpc_id = "${consul_keys.env.var.vpc_id}"
   secure_cidr = "${consul_keys.env.var.secure_cidr}"
