@@ -9,10 +9,6 @@ module "consul" {
   vpc_cidr = "${consul_keys.env.var.vpc_cidr}"
 }
 
-
-
-
-
 resource "aws_security_group" "test-web" {
   name = "${var.security_group_name}"
   description = "Manage connections to the webservers"
@@ -26,7 +22,7 @@ resource "aws_security_group" "test-web" {
     from_port = 22
     to_port = 22
     protocol = "tcp"
-    cidr_blocks = ["${consul_keys.env.var.secure_cidr}","${consul_keys.env.var.mgmt_vpc_cidr}", "${consul_keys.env.var.cr_lan_ip}", "${consul_keys.env.var.vpc_cidr}" ]
+    cidr_blocks = ["${.var.secure_cidr}","${consul_keys.env.var.mgmt_vpc_cidr}", "${consul_keys.env.var.cr_lan_ip}", "${consul_keys.env.var.vpc_cidr}" ]
   }
   ingress {
     from_port = 80
