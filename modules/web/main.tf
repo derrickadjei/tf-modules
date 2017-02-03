@@ -108,9 +108,9 @@ resource "aws_instance" "web-a" {
   security_groups = ["${aws_security_group.rnd17-web.id}"]
   subnet_id = "${var.eu-west-1a-private}"
   tags {
-    Name = "rnd17-web-${var.environment}"
-    Class = "web"
-    Product = "rnd17"
+    Name = "${var.environment}"
+    Class = "${var.class}"
+    Product = "${var.product}"
     Env = "${var.environment}"
   }
 }
@@ -124,9 +124,9 @@ resource "aws_instance" "web-b" {
   security_groups = ["${aws_security_group.rnd17-web.id}"]
   subnet_id = "${var.eu-west-1b-private}"
   tags {
-    Name = "rnd17-web-${var.environment}"
-    Class = "web"
-    Product = "rnd17"
+    Name = "${var.environment}"
+    Class = "${var.class}"
+    Product = "${var.product}"
     Env = "${var.environment}"
   }
 }
@@ -140,9 +140,9 @@ resource "aws_instance" "web-c" {
   security_groups = ["${aws_security_group.rnd17-web.id}"]
   subnet_id = "${var.eu-west-1c-private}"
   tags {
-    Name = "rnd17-web-${var.environment}"
-    Class = "web"
-    Product = "rnd17"
+    Name = "${var.environment}"
+    Class = "${var.class}"
+    Product = "${var.product}"
     Env = "${var.environment}"
   }
 }

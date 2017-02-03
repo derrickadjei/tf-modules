@@ -35,7 +35,7 @@ variable "web-instance_size" {
 }
 
 variable "aws_key_name" {
-  default = "eu-west-1"
+  default = ""
 }
 
 variable "eu-west-1a-private" {
@@ -47,5 +47,13 @@ variable "eu-west-1b-private" {
 }
 
 variable "eu-west-1c-private" {
+  default = ""
+}
+
+variable "class" {
+  default = ""
+}
+
+variable "product" {
   default = ""
 }
