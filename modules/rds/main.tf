@@ -1,3 +1,7 @@
+########################
+# MySQL engine for RDS #
+########################
+
 resource "aws_db_instance" "rnd17-db" {
     identifier = "rnd17-db-${var.environment}"
     allocated_storage = "${consul_keys.env.var.db_storage}"

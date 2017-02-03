@@ -1,3 +1,7 @@
+###########################
+# Memcache Cluster for ES #
+###########################
+
 resource "aws_elasticache_cluster" "rnd17-store" {
     cluster_id = "rnd17-${var.environment}" #cam rather than rnd17 as it can't be longer than 20 chars
     engine = "memcached"
