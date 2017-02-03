@@ -1,20 +1,20 @@
-variable "ami" {
+variable "environment" {
   default = ""
 }
 
-variable "webcache_count" {
-  default = "1"
-}
-
-variable "instance_type" {
+variable "secure_cidr" {
   default = ""
 }
 
-variable "key_name" {
+variable "mgmt_vpc_cidr" {
   default = ""
 }
 
-variable "subnet_id" {
+variable "cr_lan_ip" {
+  default = ""
+}
+
+variable "vpc_cidr" {
   default = ""
 }
 
@@ -22,18 +22,30 @@ variable "name" {
   default = ""
 }
 
-variable "class" {
+variable "aws_ubuntu_ami" {
   default = ""
 }
 
-variable "product" {
+variable "web_count" {
+  default = "1"
+}
+
+variable "web-instance_size" {
   default = ""
 }
 
-variable "env" {
-  default = ""
-}
-
-variable "availability_zone" {
+variable "aws_key_name" {
   default = "eu-west-1"
+}
+
+variable "eu-west-1a-private" {
+  default = ""
+}
+
+variable "eu-west-1b-private" {
+  default = ""
+}
+
+variable "eu-west-1c-private" {
+  default = ""
 }
