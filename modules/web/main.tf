@@ -103,7 +103,7 @@ resource "aws_instance" "web-a" {
   ami = "${var.aws_ubuntu_ami}"
   availability_zone = "eu-west-1a"
   count = "${var.web_count}"
-  instance_type = "${var.rnd17-web-instance_size}"
+  instance_type = "${var.web-instance_size}"
   key_name = "${var.aws_key_name}"
   security_groups = ["${aws_security_group.rnd17-web.id}"]
   subnet_id = "${var.eu-west-1a-private}"
@@ -119,7 +119,7 @@ resource "aws_instance" "web-b" {
   ami = "${var.aws_ubuntu_ami}"
   availability_zone = "eu-west-1b"
   count = "${var.web_count}"
-  instance_type = "${var.rnd17-web-instance_size}"
+  instance_type = "${var.web-instance_size}"
   key_name = "${var.aws_key_name}"
   security_groups = ["${aws_security_group.rnd17-web.id}"]
   subnet_id = "${var.eu-west-1b-private}"
@@ -135,7 +135,7 @@ resource "aws_instance" "web-c" {
   ami = "${var.aws_ubuntu_ami}"
   availability_zone = "eu-west-1c"
   count = "${var.web_count}"
-  instance_type = "${var.rnd17-web-instance_size}"
+  instance_type = "${var.web-instance_size}"
   key_name = "${var.aws_key_name}"
   security_groups = ["${aws_security_group.rnd17-web.id}"]
   subnet_id = "${var.eu-west-1c-private}"
