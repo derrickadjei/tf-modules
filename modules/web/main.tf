@@ -2,21 +2,21 @@
 # Webserver instances #
 #######################
 
-resource "aws_security_group" "rnd17-web" {
-  name = "rnd17-web-${var.environment}"
+resource "aws_security_group" "web" {
+  name = "${var.environment}"
   description = "Manage connections to the webservers"
 
   ingress {
     from_port = 22
     to_port = 22
     protocol = "tcp"
-    cidr_blocks = ["${consul_keys.env.var.secure_cidr}","${consul_keys.env.var.mgmt_vpc_cidr}", "${var.cr_lan_ip}", "${consul_keys.env.var.vpc_cidr}" ]
+    cidr_blocks = ["${var.secure_cidr}","${var.mgmt_vpc_cidr}", "${var.cr_lan_ip}", "${var.vpc_cidr}" ]
   }
   ingress {
     from_port = 80
     to_port = 80
     protocol = "tcp"
-    cidr_blocks = ["${consul_keys.env.var.secure_cidr}","${consul_keys.env.var.mgmt_vpc_cidr}", "${consul_keys.env.var.vpc_cidr}", "${var.cr_lan_ip}"]
+    cidr_blocks = ["${var.secure_cidr}","${var.mgmt_vpc_cidr}", "${var.vpc_cidr}", "${var.cr_lan_ip}"]
   }
   ingress {
     from_port = 24007
@@ -40,13 +40,13 @@ resource "aws_security_group" "rnd17-web" {
     from_port = 8300
     to_port = 8301
     protocol = "tcp"
-    cidr_blocks = ["${consul_keys.env.var.vpc_cidr}"]
+    cidr_blocks = ["${var.vpc_cidr}"]
   }
   ingress {
     from_port = 8300
     to_port = 8301
     protocol = "udp"
-    cidr_blocks = ["${consul_keys.env.var.vpc_cidr}"]
+    cidr_blocks = ["${var.vpc_cidr}"]
   }
   ingress {
     from_port = 2049
@@ -90,7 +90,7 @@ resource "aws_security_group" "rnd17-web" {
     protocol = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  vpc_id = "${consul_keys.env.var.vpc_id}"
+  vpc_id = "${var.vpc_id}"
   tags {
     Env = "${var.environment}"
     Class = "securitygroup"
