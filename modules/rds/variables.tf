@@ -47,10 +47,6 @@ variable "name" {
   default = ""
 }
 
-variable "aws_ubuntu_ami" {
-  default = ""
-}
-
 variable "web_count" {
   default = "1"
 }

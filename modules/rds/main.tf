@@ -2,7 +2,7 @@
 # MySQL engine for RDS #
 ########################
 
-resource "aws_db_instance" "rnd17-db" {
+resource "aws_db_instance" "db" {
     identifier = "rnd17-db-${var.environment}"
     allocated_storage = "${var.db_storage}"
     storage_type = "${var.db_storage_type}"
@@ -14,7 +14,7 @@ resource "aws_db_instance" "rnd17-db" {
     username = "${var.db_user}"
     password = "${var.db_passwd}"
     db_subnet_group_name = "${aws_db_subnet_group.db.name}"
-    vpc_security_group_ids = ["${aws_security_group.rnd17-db.id}"]
+    vpc_security_group_ids = ["${aws_security_group.db.id}"]
 }
 
 resource "aws_db_parameter_group" "db" {
@@ -39,15 +39,15 @@ resource "aws_db_subnet_group" "db" {
     subnet_ids = ["${var.eu-west-1a-private}", "${var.eu-west-1b-private}", "${var.eu-west-1c-private}"]
 }
 
-resource "aws_route53_record" "rnd17-db" {
+resource "aws_route53_record" "db" {
    zone_id = "${var.zoneid}"
    name = "rnd17-db-${var.environment}.sys.comicrelief.com"
    type = "CNAME"
    ttl = "300"
-   records = ["${aws_db_instance.rnd17-db.address}"]
+   records = ["${aws_db_instance.db.address}"]
 }
 
-resource "aws_security_group" "rnd17-db" {
+resource "aws_security_group" "db" {
   name = "rnd17-db-${var.environment}"
   description = "Allow SSH traffic from the internet"
 
