@@ -25,7 +25,7 @@ variable "aws_ubuntu_ami" {
   default = ""
 }
 
-variable "webcache_count" {
+variable "search_count" {
   default = "1"
 }
 
