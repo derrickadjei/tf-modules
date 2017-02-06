@@ -70,7 +70,7 @@ resource "aws_security_group" "rnd17-db" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  vpc_id = "${consul_keys.env.var.vpc_id}"
+  vpc_id = "${var.vpc_id}"
   tags {
     Env = "${var.environment}"
     Class = "securitygroup"
