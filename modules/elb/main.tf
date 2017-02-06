@@ -2,7 +2,7 @@
 # ELB #
 #######
 
-resource "aws_security_group" "crab-elb" {
+resource "aws_security_group" "elb" {
   name = "crab-elb-${var.environment}"
   description = "Manage connections to varnish servers"
 
@@ -24,7 +24,7 @@ resource "aws_security_group" "crab-elb" {
     protocol = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  vpc_id = "${consul_keys.env.var.vpc_id}"
+  vpc_id = "${var.vpc_id}"
   tags {
     Env = "${var.environment}"
     Class = "securitygroup"
@@ -32,8 +32,8 @@ resource "aws_security_group" "crab-elb" {
 }
 
 resource "aws_elb" "crab-elb" {
-  name = "crab-elb-${var.environment}"
-  subnets = ["${consul_keys.env.var.eu-west-1a-public}", "${consul_keys.env.var.eu-west-1b-public}", "${consul_keys.env.var.eu-west-1c-public}"]
+  name = "${var.environment}"
+  subnets = ["${var.eu-west-1a-public}", "${var.eu-west-1b-public}", "${var.eu-west-1c-public}"]
   security_groups = ["${aws_security_group.crab-elb.id}"]
   internal = false
   listener {
@@ -47,7 +47,7 @@ resource "aws_elb" "crab-elb" {
     instance_protocol = "http"
     lb_port = 443
     lb_protocol = "https"
-    ssl_certificate_id = "${consul_keys.env.var.ssl_cert_id}"
+    ssl_certificate_id = "${var.ssl_cert_id}"
   }
   health_check {
     healthy_threshold = 2
@@ -63,8 +63,8 @@ resource "aws_elb" "crab-elb" {
   connection_draining_timeout = 400
   tags {
     Name = "crab-elb-${var.environment}"
-    Class = "elb"
-    Product = "crab"
+    Class = "${var.class}"
+    Product = "${var.environment}"
     Env = "${var.environment}"
   }
 }
