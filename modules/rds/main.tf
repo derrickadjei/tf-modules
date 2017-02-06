@@ -4,15 +4,15 @@
 
 resource "aws_db_instance" "rnd17-db" {
     identifier = "rnd17-db-${var.environment}"
-    allocated_storage = "${consul_keys.env.var.db_storage}"
-    storage_type = "${consul_keys.env.var.db_storage_type}"
+    allocated_storage = "${var.db_storage}"
+    storage_type = "${var.db_storage_type}"
     engine = "mysql"
     engine_version = "5.6"
     parameter_group_name = "${aws_db_parameter_group.db.name}"
-    instance_class = "${consul_keys.env.var.db_instance_size}"
-    name = "${consul_keys.env.var.db_name}"
-    username = "${consul_keys.env.var.db_user}"
-    password = "${consul_keys.env.var.db_passwd}"
+    instance_class = "${var.db_instance_size}"
+    name = "${var.db_name}"
+    username = "${var.db_user}"
+    password = "${var.db_passwd}"
     db_subnet_group_name = "${aws_db_subnet_group.db.name}"
     vpc_security_group_ids = ["${aws_security_group.rnd17-db.id}"]
 }
@@ -36,7 +36,7 @@ resource "aws_db_parameter_group" "db" {
 resource "aws_db_subnet_group" "db" {
     name = "rnd17-db-subnet-${var.environment}"
     description = "Subnet group for rnd MySQL db"
-    subnet_ids = ["${consul_keys.env.var.eu-west-1a-private}", "${consul_keys.env.var.eu-west-1b-private}", "${consul_keys.env.var.eu-west-1c-private}"]
+    subnet_ids = ["${var.eu-west-1a-private}", "${var.eu-west-1b-private}", "${var.eu-west-1c-private}"]
 }
 
 resource "aws_route53_record" "rnd17-db" {
@@ -55,13 +55,13 @@ resource "aws_security_group" "rnd17-db" {
     from_port = 3306
     to_port = 3306
     protocol = "tcp"
-    cidr_blocks = ["${consul_keys.env.var.secure_cidr}","${consul_keys.env.var.mgmt_vpc_cidr}", "${consul_keys.env.var.vpc_cidr}", "${var.cr_lan_ip}"]
+    cidr_blocks = ["${var.secure_cidr}","${var.mgmt_vpc_cidr}", "${var.vpc_cidr}", "${var.cr_lan_ip}"]
   }
   ingress {
     from_port = 22
     to_port = 22
     protocol = "tcp"
-    cidr_blocks = ["${consul_keys.env.var.secure_cidr}","${consul_keys.env.var.mgmt_vpc_cidr}", "${consul_keys.env.var.vpc_cidr}", "${var.cr_lan_ip}"]
+    cidr_blocks = ["${var.secure_cidr}","${var.mgmt_vpc_cidr}", "${var.vpc_cidr}", "${var.cr_lan_ip}"]
   }
   egress {
     from_port = 0
