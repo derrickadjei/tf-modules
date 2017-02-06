@@ -1,5 +1,4 @@
 variable "environment" {
-  default = ""
 }
 
 variable "secure_cidr" {
@@ -18,6 +17,10 @@ variable "vpc_cidr" {
   default = ""
 }
 
+variable "ssl_cert_id" {
+  default = ""
+}
+
 variable "name" {
   default = ""
 }
@@ -26,11 +29,11 @@ variable "aws_ubuntu_ami" {
   default = ""
 }
 
-variable "web_count" {
+variable "webcache_count" {
   default = "1"
 }
 
-variable "web-instance_size" {
+variable "webcache-instance_size" {
   default = ""
 }
 
@@ -46,7 +49,16 @@ variable "eu-west-1b-private" {
   default = ""
 }
 
-variable "eu-west-1c-private" {
+
+variable "eu-west-1a-public" {
+  default = ""
+}
+
+variable "eu-west-1b-public" {
+  default = ""
+}
+
+variable "eu-west-1c-public" {
   default = ""
 }
 

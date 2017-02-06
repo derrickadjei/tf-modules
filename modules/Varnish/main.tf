@@ -108,7 +108,7 @@ resource "aws_elb" "rnd17-elb" {
     interval = 30
   }
 
-  instances = ["${aws_instance.rnd17-webcache-a.*.id}","${aws_instance.rnd17-webcache-b.*.id}"]
+  instances = ["${aws_instance.webcache-a.*.id}","${aws_instance.webcache-b.*.id}"]
   cross_zone_load_balancing = true
   idle_timeout = 400
   connection_draining = true
@@ -122,34 +122,34 @@ resource "aws_elb" "rnd17-elb" {
   }
 }
 
-resource "aws_instance" "rnd17-webcache-a" {
+resource "aws_instance" "webcache-a" {
   ami = "${var.aws_ubuntu_ami}"
   availability_zone = "eu-west-1a"
   count = "${var.webcache_count}"
-  instance_type = "${var.rnd17-webcache-instance_size}"
+  instance_type = "${var.webcache-instance_size}"
   key_name = "${var.aws_key_name}"
-  security_groups = ["${aws_security_group.rnd17-webcache.id}"]
+  security_groups = ["${aws_security_group.webcache.id}"]
   subnet_id = "${var.eu-west-1a-private}"
   tags {
     Name = "${var.environment}"
-    Class = "webcache"
-    Product = "rnd17"
+    Class = "${var.class}"
+    Product = "${var.product}"
     Env = "${var.environment}"
   }
 }
 
-resource "aws_instance" "rnd17-webcache-b" {
+resource "aws_instance" "webcache-b" {
   ami = "${var.aws_ubuntu_ami}"
   availability_zone = "eu-west-1b"
   count = "${var.webcache_count}"
-  instance_type = "${var.rnd17-webcache-instance_size}"
+  instance_type = "${var.webcache-instance_size}"
   key_name = "${var.aws_key_name}"
-  security_groups = ["${aws_security_group.rnd17-webcache.id}"]
+  security_groups = ["${aws_security_group.webcache.id}"]
   subnet_id = "${var.eu-west-1b-private}"
   tags {
-    Name = "r${var.environment}"
-    Class = "webcache"
-    Product = "rnd17"
+    Name = "${var.environment}"
+    Class = "${var.class}"
+    Product = "${var.product}"
     Env = "${var.environment}"
   }
 }
