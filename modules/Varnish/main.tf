@@ -3,7 +3,7 @@
 # Varnish instances #
 #######################
 
-resource "aws_security_group" "rnd17-webcache" {
+resource "aws_security_group" "webcache" {
   name = "rnd17-webcache-${var.environment}"
   description = "Manage connections to varnish"
 
@@ -11,7 +11,7 @@ resource "aws_security_group" "rnd17-webcache" {
     from_port = 22
     to_port = 22
     protocol = "tcp"
-    cidr_blocks = ["${consul_keys.env.var.secure_cidr}","${consul_keys.env.var.mgmt_vpc_cidr}", "${var.cr_lan_ip}"]
+    cidr_blocks = ["${var.secure_cidr}","${var.mgmt_vpc_cidr}", "${var.cr_lan_ip}"]
   }
   ingress {
     from_port = 6081
@@ -29,13 +29,13 @@ resource "aws_security_group" "rnd17-webcache" {
     from_port = 8300
     to_port = 8301
     protocol = "tcp"
-    cidr_blocks = ["${consul_keys.env.var.vpc_cidr}"]
+    cidr_blocks = ["${var.vpc_cidr}"]
   }
   ingress {
     from_port = 8300
     to_port = 8301
     protocol = "udp"
-    cidr_blocks = ["${consul_keys.env.var.vpc_cidr}"]
+    cidr_blocks = ["${var.vpc_cidr}"]
   }
   egress {
     from_port = 0
@@ -43,7 +43,7 @@ resource "aws_security_group" "rnd17-webcache" {
     protocol = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  vpc_id = "${consul_keys.env.var.vpc_id}"
+  vpc_id = "${var.vpc_id}"
   tags {
     Env = "${var.environment}"
     Class = "securitygroup"
@@ -73,7 +73,7 @@ resource "aws_security_group" "rnd17-elb" {
     protocol = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  vpc_id = "${consul_keys.env.var.vpc_id}"
+  vpc_id = "${var.vpc_id}"
   tags {
     Env = "${var.environment}"
     Class = "securitygroup"
@@ -82,7 +82,7 @@ resource "aws_security_group" "rnd17-elb" {
 }
 resource "aws_elb" "rnd17-elb" {
   name = "rnd17-elb-${var.environment}"
-  subnets = ["${consul_keys.env.var.eu-west-1a-public}", "${consul_keys.env.var.eu-west-1b-public}", "${consul_keys.env.var.eu-west-1c-public}"]
+  subnets = ["${var.eu-west-1a-public}", "${var.eu-west-1b-public}", "${var.eu-west-1c-public}"]
   security_groups = ["${aws_security_group.rnd17-elb.id}"]
   internal = false
 
@@ -97,7 +97,7 @@ resource "aws_elb" "rnd17-elb" {
     instance_protocol = "http"
     lb_port = 443
     lb_protocol = "https"
-    ssl_certificate_id = "${consul_keys.env.var.ssl_cert_id}"
+    ssl_certificate_id = "${var.ssl_cert_id}"
   }
 
   health_check {
@@ -115,37 +115,39 @@ resource "aws_elb" "rnd17-elb" {
   connection_draining_timeout = 400
 
   tags {
-    Name = "rnd17-elb-${var.environment}"
+    Name = "${var.environment}"
     Class = "elb"
     Product = "rnd17"
     Env = "${var.environment}"
   }
 }
+
 resource "aws_instance" "rnd17-webcache-a" {
-  ami = "${consul_keys.env.var.aws_ubuntu_ami}"
+  ami = "${var.aws_ubuntu_ami}"
   availability_zone = "eu-west-1a"
   count = "${var.webcache_count}"
-  instance_type = "${consul_keys.env.var.rnd17-webcache-instance_size}"
+  instance_type = "${var.rnd17-webcache-instance_size}"
   key_name = "${var.aws_key_name}"
   security_groups = ["${aws_security_group.rnd17-webcache.id}"]
-  subnet_id = "${consul_keys.env.var.eu-west-1a-private}"
+  subnet_id = "${var.eu-west-1a-private}"
   tags {
-    Name = "rnd17-webcache-${var.environment}"
+    Name = "${var.environment}"
     Class = "webcache"
     Product = "rnd17"
     Env = "${var.environment}"
   }
 }
+
 resource "aws_instance" "rnd17-webcache-b" {
-  ami = "${consul_keys.env.var.aws_ubuntu_ami}"
+  ami = "${var.aws_ubuntu_ami}"
   availability_zone = "eu-west-1b"
   count = "${var.webcache_count}"
-  instance_type = "${consul_keys.env.var.rnd17-webcache-instance_size}"
+  instance_type = "${var.rnd17-webcache-instance_size}"
   key_name = "${var.aws_key_name}"
   security_groups = ["${aws_security_group.rnd17-webcache.id}"]
-  subnet_id = "${consul_keys.env.var.eu-west-1b-private}"
+  subnet_id = "${var.eu-west-1b-private}"
   tags {
-    Name = "rnd17-webcache-${var.environment}"
+    Name = "r${var.environment}"
     Class = "webcache"
     Product = "rnd17"
     Env = "${var.environment}"

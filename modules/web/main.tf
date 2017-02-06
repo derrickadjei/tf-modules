@@ -2,6 +2,8 @@
 # Webserver instances #
 #######################
 
+#Web security group and 3 web instances
+
 resource "aws_security_group" "web" {
   name = "${var.environment}"
   description = "Manage connections to the webservers"

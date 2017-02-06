@@ -1,9 +1,4 @@
-variable "security_group_name" {
-  default = ""
-}
-
-variable "vpc_id" {
-  description = "VPC for this security group"
+variable "environment" {
   default = ""
 }
 
@@ -23,6 +18,42 @@ variable "vpc_cidr" {
   default = ""
 }
 
-variable "env" {
+variable "name" {
+  default = ""
+}
+
+variable "aws_ubuntu_ami" {
+  default = ""
+}
+
+variable "web_count" {
+  default = "1"
+}
+
+variable "web-instance_size" {
+  default = ""
+}
+
+variable "aws_key_name" {
+  default = ""
+}
+
+variable "eu-west-1a-private" {
+  default = ""
+}
+
+variable "eu-west-1b-private" {
+  default = ""
+}
+
+variable "eu-west-1c-private" {
+  default = ""
+}
+
+variable "class" {
+  default = ""
+}
+
+variable "product" {
   default = ""
 }
