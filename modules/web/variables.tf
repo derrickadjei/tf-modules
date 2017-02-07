@@ -42,15 +42,15 @@ variable "aws_key_name" {
   default = ""
 }
 
-variable "eu-west-1a-private" {
+variable "subnet_id-1a" {
   default = ""
 }
 
-variable "eu-west-1b-private" {
+variable "subnet_id-1b" {
   default = ""
 }
 
-variable "eu-west-1c-private" {
+variable "subnet_id-1c" {
   default = ""
 }
 
