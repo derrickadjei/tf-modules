@@ -3,7 +3,7 @@
 #######
 
 resource "aws_security_group" "elb" {
-  name = "crab-elb-${var.environment}"
+  name = "${var.environment}"
   description = "Manage connections to varnish servers"
 
   ingress {
@@ -31,10 +31,10 @@ resource "aws_security_group" "elb" {
   }
 }
 
-resource "aws_elb" "crab-elb" {
+resource "aws_elb" "elb" {
   name = "${var.environment}"
   subnets = ["${var.eu-west-1a-public}", "${var.eu-west-1b-public}", "${var.eu-west-1c-public}"]
-  security_groups = ["${aws_security_group.crab-elb.id}"]
+  security_groups = ["${aws_security_group.elb.id}"]
   internal = false
   listener {
     instance_port = 80
@@ -62,7 +62,7 @@ resource "aws_elb" "crab-elb" {
   connection_draining = true
   connection_draining_timeout = 400
   tags {
-    Name = "crab-elb-${var.environment}"
+    Name = "${var.environment}"
     Class = "${var.class}"
     Product = "${var.environment}"
     Env = "${var.environment}"

@@ -2,46 +2,46 @@
 # Memcache Cluster for ES #
 ###########################
 
-resource "aws_elasticache_cluster" "rnd17-store" {
-    cluster_id = "rnd17-${var.environment}" #cam rather than rnd17 as it can't be longer than 20 chars
+resource "aws_elasticache_cluster" "store" {
+    cluster_id = "${var.environment}" #cam rather than  as it can't be longer than 20 chars
     engine = "memcached"
-    node_type = "${consul_keys.env.var.mc_instance_size}"
+    node_type = "${var.mc_instance_size}"
     port = 11211
     num_cache_nodes = 1
     parameter_group_name = "default.memcached1.4"
-    security_group_ids = ["${aws_security_group.rnd17-store.id}"]
-    subnet_group_name = "${aws_elasticache_subnet_group.rnd17-store.name}"
+    security_group_ids = ["${aws_security_group.store.id}"]
+    subnet_group_name = "${aws_elasticache_subnet_group.store.name}"
     tags {
-      Name = "rnd17-${var.environment}"
+      Name = "${var.environment}"
       Class = "cache"
-      Product = "rnd17"
+      Product = "${var.product}"
       Env = "${var.environment}"
     }
 }
 
-resource "aws_elasticache_subnet_group" "rnd17-store" {
-    name = "rnd17-store-subnet-${var.environment}"
+resource "aws_elasticache_subnet_group" "store" {
+    name = "${var.environment}"
     description = "Subnet group for rnd Memcache cluster"
-    subnet_ids = ["${consul_keys.env.var.eu-west-1a-private}","${consul_keys.env.var.eu-west-1b-private}","${consul_keys.env.var.eu-west-1c-private}"]
+    subnet_ids = ["${var.eu-west-1a-private}","${var.eu-west-1b-private}","${var.eu-west-1c-private}"]
 }
 
-resource "aws_route53_record" "rnd17-store" {
+resource "aws_route53_record" "store" {
    zone_id = "${var.zoneid}"
-   name = "rnd17-store-${var.environment}.sys.comicrelief.com"
+   name = "${var.environment}"
    type = "CNAME"
    ttl = "300"
-   records = ["${aws_elasticache_cluster.rnd17-store.cache_nodes.0.address}"]
+   records = ["${aws_elasticache_cluster.store.cache_nodes.0.address}"]
 }
 
-resource "aws_security_group" "rnd17-store" {
-  name = "rnd17-memcache-${var.environment}"
+resource "aws_security_group" "store" {
+  name = "${var.environment}"
   description = "Allow SSH traffic from the internet"
 
   ingress {
     from_port = 11211
     to_port = 11211
     protocol = "tcp"
-    cidr_blocks = ["${consul_keys.env.var.vpc_cidr}"]
+    cidr_blocks = ["${var.vpc_cidr}"]
   }
   egress {
     from_port = 0
@@ -49,14 +49,14 @@ resource "aws_security_group" "rnd17-store" {
     protocol = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  vpc_id = "${consul_keys.env.var.vpc_id}"
+  vpc_id = "${var.vpc_id}"
   tags {
     Env = "${var.environment}"
-    Class = "securitygroup"
+    Class = "${var.environment}"
   }
 
 }
 
 output "vpc_id" {
-    value = "${consul_keys.env.var.vpc_id}"
+    value = "${var.vpc_id}"
 }

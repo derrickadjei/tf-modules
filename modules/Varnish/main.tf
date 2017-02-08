@@ -4,7 +4,7 @@
 #######################
 
 resource "aws_security_group" "webcache" {
-  name = "rnd17-webcache-${var.environment}"
+  name = "webcache-${var.environment}"
   description = "Manage connections to varnish"
 
   ingress {
@@ -17,13 +17,13 @@ resource "aws_security_group" "webcache" {
     from_port = 6081
     to_port = 6081
     protocol = "tcp"
-    security_groups = ["${aws_security_group.rnd17-elb.id}"]
+    security_groups = ["${aws_security_group.elb.id}"]
   }
   ingress {
     from_port = 6082
     to_port = 6082
     protocol = "tcp"
-    security_groups = ["${aws_security_group.rnd17-web.id}"]
+    security_groups = ["${module.web.security_group_id_web}"]
   }
   ingress {
     from_port = 8300
@@ -51,8 +51,8 @@ resource "aws_security_group" "webcache" {
 
 }
 
-resource "aws_security_group" "rnd17-elb" {
-  name = "rnd17-elb-${var.environment}"
+resource "aws_security_group" "elb" {
+  name = "${var.environment}"
   description = "Manage connections to varnish servers"
 
   ingress {
@@ -80,10 +80,10 @@ resource "aws_security_group" "rnd17-elb" {
   }
 
 }
-resource "aws_elb" "rnd17-elb" {
-  name = "rnd17-elb-${var.environment}"
+resource "aws_elb" "elb" {
+  name = "${var.environment}"
   subnets = ["${var.eu-west-1a-public}", "${var.eu-west-1b-public}", "${var.eu-west-1c-public}"]
-  security_groups = ["${aws_security_group.rnd17-elb.id}"]
+  security_groups = ["${aws_security_group.elb.id}"]
   internal = false
 
   listener {
@@ -116,8 +116,8 @@ resource "aws_elb" "rnd17-elb" {
 
   tags {
     Name = "${var.environment}"
-    Class = "elb"
-    Product = "rnd17"
+    Class = "${var.class_elb}"
+    Product ="${var.product_elb}"
     Env = "${var.environment}"
   }
 }
@@ -156,8 +156,8 @@ resource "aws_instance" "webcache-b" {
 
 resource "aws_route53_record" "rnd17" {
    zone_id = "${var.zoneid}"
-   name = "rnd17-${var.environment}.sys.comicrelief.com"
+   name = "${var.environment}.sys.comicrelief.com"
    type = "CNAME"
    ttl = "300"
-   records = ["${aws_elb.rnd17-elb.dns_name}"]
+   records = ["${aws_elb.elb.dns_name}"]
 }

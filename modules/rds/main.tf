@@ -3,7 +3,7 @@
 ########################
 
 resource "aws_db_instance" "db" {
-    identifier = "rnd17-db-${var.environment}"
+    identifier = "${var.environment}"
     allocated_storage = "${var.db_storage}"
     storage_type = "${var.db_storage_type}"
     engine = "mysql"
@@ -34,21 +34,21 @@ resource "aws_db_parameter_group" "db" {
 }
 
 resource "aws_db_subnet_group" "db" {
-    name = "rnd17-db-subnet-${var.environment}"
+    name = "subnet-${var.environment}"
     description = "Subnet group for rnd MySQL db"
     subnet_ids = ["${var.eu-west-1a-private}", "${var.eu-west-1b-private}", "${var.eu-west-1c-private}"]
 }
 
 resource "aws_route53_record" "db" {
    zone_id = "${var.zoneid}"
-   name = "rnd17-db-${var.environment}.sys.comicrelief.com"
+   name = "${var.environment}.sys.comicrelief.com"
    type = "CNAME"
    ttl = "300"
    records = ["${aws_db_instance.db.address}"]
 }
 
 resource "aws_security_group" "db" {
-  name = "rnd17-db-${var.environment}"
+  name = "${var.environment}"
   description = "Allow SSH traffic from the internet"
 
   ingress {

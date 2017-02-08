@@ -3,7 +3,7 @@
 ####################
 
 resource "aws_security_group" "search" {
-  name = "rnd17-search-${var.environment}"
+  name = "${var.environment}"
   description = "Manage connections to search instances"
 
   ingress {
@@ -50,8 +50,8 @@ resource "aws_instance" "search" {
   count = "${var.search_count}"
   instance_type = "${var.search-instance_size}"
   key_name = "${var.aws_key_name}"
-  security_groups = ["${aws_security_group.rnd17-search.id}"]
-  subnet_id = "${consul_keys.env.var.eu-west-1a-private}"
+  security_groups = ["${aws_security_group.search.id}"]
+  subnet_id = "${var.eu-west-1a-private}"
   tags {
     Name = "${var.environment}"
     Class = "${var.Class}"
