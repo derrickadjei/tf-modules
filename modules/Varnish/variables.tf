@@ -69,3 +69,11 @@ variable "class" {
 variable "product" {
   default = ""
 }
+
+variable "vpc_id" {
+  default = ""
+}
+
+variable "zoneid" {
+  default = ""
+}

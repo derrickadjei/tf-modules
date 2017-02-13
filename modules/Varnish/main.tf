@@ -116,8 +116,8 @@ resource "aws_elb" "elb" {
 
   tags {
     Name = "${var.environment}"
-    Class = "${var.class_elb}"
-    Product ="${var.product_elb}"
+    Class = "${var.class}"
+    Product ="${var.product}"
     Env = "${var.environment}"
   }
 }
@@ -154,7 +154,7 @@ resource "aws_instance" "webcache-b" {
   }
 }
 
-resource "aws_route53_record" "rnd17" {
+resource "aws_route53_record" "varnish_route" {
    zone_id = "${var.zoneid}"
    name = "${var.environment}.sys.comicrelief.com"
    type = "CNAME"
