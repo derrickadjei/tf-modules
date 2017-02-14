@@ -1,4 +1,5 @@
 variable "environment" {
+  default = ""
 }
 
 variable "secure_cidr" {
