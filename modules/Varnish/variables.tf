@@ -21,7 +21,7 @@ variable "ssl_cert_id" {
   default = ""
 }
 
-variable "name" {
+variable "Name" {
   default = ""
 }
 
