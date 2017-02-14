@@ -3,6 +3,11 @@
 # Varnish instances #
 #######################
 
+module "web" {
+  source = "../web"
+}
+
+
 resource "aws_security_group" "webcache" {
   name = "webcache-${var.environment}"
   description = "Manage connections to varnish"
