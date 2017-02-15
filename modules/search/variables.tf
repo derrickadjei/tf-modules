@@ -41,10 +41,13 @@ variable "Eu-west-1a-private" {
   default = ""
 }
 
-variable "class" {
+variable "Class" {
   default = ""
 }
 
 variable "product" {
+  default = ""
+}
+variable "vpc_id" {
   default = ""
 }
