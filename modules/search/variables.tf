@@ -37,7 +37,7 @@ variable "aws_key_name" {
   default = ""
 }
 
-variable "eu-west-1a-private" {
+variable "Eu-west-1a-private" {
   default = ""
 }
 

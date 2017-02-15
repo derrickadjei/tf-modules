@@ -51,7 +51,7 @@ resource "aws_instance" "search" {
   instance_type = "${var.search-instance_size}"
   key_name = "${var.aws_key_name}"
   security_groups = ["${aws_security_group.search.id}"]
-  subnet_id = "${var.eu-west-1a-private}"
+  subnet_id = "${var.Eu-west-1a-private}"
   tags {
     Name = "${var.environment}"
     Class = "${var.Class}"
