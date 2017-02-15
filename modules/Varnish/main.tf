@@ -86,7 +86,7 @@ resource "aws_security_group" "elb" {
 
 }
 resource "aws_elb" "elb" {
-  name = "${var.environment}"
+  Name = "${var.environment}"
   subnets = ["${var.eu-west-1a-public}", "${var.eu-west-1b-public}", "${var.eu-west-1c-public}"]
   security_groups = ["${aws_security_group.elb.id}"]
   internal = false
