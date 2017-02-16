@@ -57,6 +57,6 @@ resource "aws_security_group" "store" {
 
 }
 
-output "vpc_id" {
-    value = "${var.vpc_id}"
-}
+#output "vpc_id" {
+#    value = "${var.vpc_id}"
+#}
