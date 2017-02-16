@@ -30,7 +30,7 @@ variable "web_count" {
   default = "1"
 }
 
-variable "web-instance_size" {
+variable "mc-instance_size" {
   default = ""
 }
 
@@ -55,5 +55,9 @@ variable "class" {
 }
 
 variable "product" {
+  default = ""
+}
+
+variable "vpc_id" {
   default = ""
 }
