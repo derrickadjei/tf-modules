@@ -107,7 +107,7 @@ resource "aws_instance" "web-a" {
   count = "${var.web_count}"
   instance_type = "${var.web-instance_size}"
   key_name = "${var.aws_key_name}"
-  security_groups = ["${aws_security_group.web.id}"]
+  vpc_security_group_ids = ["${aws_security_group.web.id}"]
   subnet_id = "${var.subnet_id-1a}"
   tags {
     Name = "${var.name}"
@@ -123,7 +123,7 @@ resource "aws_instance" "web-b" {
   count = "${var.web_count}"
   instance_type = "${var.web-instance_size}"
   key_name = "${var.aws_key_name}"
-  security_groups = ["${aws_security_group.web.id}"]
+  vpc_security_group_ids = ["${aws_security_group.web.id}"]
   subnet_id = "${var.subnet_id-1b}"
   tags {
     Name = "${var.name}"
@@ -139,7 +139,7 @@ resource "aws_instance" "web-c" {
   count = "${var.web_count}"
   instance_type = "${var.web-instance_size}"
   key_name = "${var.aws_key_name}"
-  security_groups = ["${aws_security_group.web.id}"]
+  vpc_security_group_ids = ["${aws_security_group.web.id}"]
   subnet_id = "${var.subnet_id-1c}"
   tags {
     Name = "${var.name}"
