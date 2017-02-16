@@ -61,3 +61,6 @@ variable "product" {
 variable "vpc_id" {
   default = ""
 }
+variable "zoneid" {
+  default = ""
+}
