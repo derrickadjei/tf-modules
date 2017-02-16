@@ -5,7 +5,7 @@
 resource "aws_elasticache_cluster" "store" {
     cluster_id = "${var.environment}" #cam rather than  as it can't be longer than 20 chars
     engine = "memcached"
-    node_type = "${var.mc_instance_size}"
+    node_type = "${var.mc-instance_size}"
     port = 11211
     num_cache_nodes = 1
     parameter_group_name = "default.memcached1.4"
