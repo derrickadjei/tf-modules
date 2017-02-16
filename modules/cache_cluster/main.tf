@@ -20,7 +20,7 @@ resource "aws_elasticache_cluster" "store" {
 }
 
 resource "aws_elasticache_subnet_group" "store" {
-    name = "${var.environment}"
+    name = "memcache${var.environment}"
     description = "Subnet group for rnd Memcache cluster"
     subnet_ids = ["${var.eu-west-1a-private}","${var.eu-west-1b-private}","${var.eu-west-1c-private}"]
 }
