@@ -81,3 +81,7 @@ variable "class" {
 variable "product" {
   default = ""
 }
+
+variable "vpc_id" {
+  default = ""
+}
