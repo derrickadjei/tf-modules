@@ -9,3 +9,7 @@ variable "zoneid" {
 variable "name" {
   default = ""
 }
+
+variable "Records" {
+  default = ""
+}

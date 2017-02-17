@@ -27,7 +27,7 @@ resource "aws_elasticache_subnet_group" "store" {
 
 module "route_53" {
   source = "../route53"
-  records = ["${aws_elasticache_cluster.store.cache_nodes.0.address}"]
+  Records = ["${aws_elasticache_cluster.store.cache_nodes.0.address}"]
 }
 
 #resource "aws_route53_record" "store" {
