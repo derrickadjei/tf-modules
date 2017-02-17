@@ -18,7 +18,7 @@ resource "aws_db_instance" "db" {
 }
 
 resource "aws_db_parameter_group" "db" {
-    name = "db-${var.environment}"
+    name = "db${var.environment}"
     family = "mysql5.6"
     description = "RDS default parameter group"
 
@@ -34,7 +34,7 @@ resource "aws_db_parameter_group" "db" {
 }
 
 resource "aws_db_subnet_group" "db" {
-    name = "subnet-${var.environment}"
+    name = "subnet${var.environment}"
     description = "Subnet group for rnd MySQL db"
     subnet_ids = ["${var.eu-west-1a-private}", "${var.eu-west-1b-private}", "${var.eu-west-1c-private}"]
 }
@@ -75,5 +75,4 @@ resource "aws_security_group" "db" {
     Env = "${var.environment}"
     Class = "securitygroup"
   }
-
 }

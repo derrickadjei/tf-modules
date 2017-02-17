@@ -54,5 +54,4 @@ resource "aws_security_group" "store" {
     Env = "${var.environment}"
     Class = "${var.environment}"
   }
-
 }
