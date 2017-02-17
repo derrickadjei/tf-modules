@@ -161,7 +161,7 @@ resource "aws_instance" "webcache-b" {
 
 module "route_53" {
   source = "../route53"
-  Records = ["${aws_elb.elb.dns_name}"]
+  Records = "${var.records}"
 
 }
 
