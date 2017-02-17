@@ -77,7 +77,3 @@ resource "aws_security_group" "db" {
   }
 
 }
-
-output "web_count" {
-    value = "${var.web_count}"
-}
