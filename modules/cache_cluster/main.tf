@@ -25,18 +25,13 @@ resource "aws_elasticache_subnet_group" "store" {
     subnet_ids = ["${var.eu-west-1a-private}","${var.eu-west-1b-private}","${var.eu-west-1c-private}"]
 }
 
-module "route_53" {
-  source = "../route53"
-  Records = ["${aws_elasticache_cluster.store.cache_nodes.0.address}"]
+resource "aws_route53_record" "store" {
+   zone_id = "${var.zoneid}"
+   name = "${var.environment}"
+   type = "CNAME"
+   ttl = "300"
+   records = ["${aws_elasticache_cluster.store.cache_nodes.0.address}"]
 }
-
-#resource "aws_route53_record" "store" {
-#   zone_id = "${var.zoneid}"
-#   name = "${var.environment}"
-#   type = "CNAME"
-#   ttl = "300"
-#   records = ["${aws_elasticache_cluster.store.cache_nodes.0.address}"]
-#}
 
 resource "aws_security_group" "store" {
   name = "${var.environment}"
