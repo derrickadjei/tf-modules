@@ -78,3 +78,7 @@ variable "vpc_id" {
 variable "zoneid" {
   default = ""
 }
+
+variable "records" {
+  default = ["${aws_elb.elb.dns_name}"]
+}
