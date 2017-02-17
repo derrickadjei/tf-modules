@@ -80,5 +80,5 @@ variable "zoneid" {
 }
 
 variable "records" {
-  default = ["${aws_elb.elb.dns_name}"]
+  list = ["${aws_elb.elb.dns_name}"]
 }
