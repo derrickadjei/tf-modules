@@ -3,7 +3,7 @@
 ########################
 
 resource "aws_db_instance" "db" {
-    identifier = "${var.environment}"
+    identifier = "db${var.environment}"
     allocated_storage = "${var.db_storage}"
     storage_type = "${var.db_storage_type}"
     engine = "mysql"
