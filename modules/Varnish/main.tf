@@ -159,10 +159,18 @@ resource "aws_instance" "webcache-b" {
   }
 }
 
-resource "aws_route53_record" "varnish_route" {
-   zone_id = "${var.zoneid}"
-   name = "${var.environment}.sys.comicrelief.com"
-   type = "CNAME"
-   ttl = "300"
-   records = ["${aws_elb.elb.dns_name}"]
+module "route_53" {
+  source = "../route53/"
+  records = ["${aws_elb.elb.dns_name}"]
+
 }
+
+
+
+#resource "aws_route53_record" "varnish_route" {
+#   zone_id = "${var.zoneid}"
+#   name = "${var.environment}.sys.comicrelief.com"
+#   type = "CNAME"
+#   ttl = "300"
+#   records = ["${aws_elb.elb.dns_name}"]
+#}
