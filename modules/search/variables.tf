@@ -51,3 +51,10 @@ variable "product" {
 variable "vpc_id" {
   default = ""
 }
+variable "name_sg" {
+  default = ""
+}
+
+variable "search_name" {
+  default = ""
+}
