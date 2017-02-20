@@ -51,15 +51,15 @@ variable "eu-west-1b-private" {
 }
 
 
-variable "eu-west-1a-public" {
+variable "subnet-1a-public" {
   default = ""
 }
 
-variable "eu-west-1b-public" {
+variable "subnet-1b-public" {
   default = ""
 }
 
-variable "eu-west-1c-public" {
+variable "subnet-1c-public" {
   default = ""
 }
 
@@ -76,5 +76,16 @@ variable "vpc_id" {
 }
 
 variable "zoneid" {
+  default = ""
+}
+variable "elb-name" {
+  default = ""
+}
+
+variable "elb-class" {
+  default = ""
+}
+
+variable "name_route_varnish" {
   default = ""
 }

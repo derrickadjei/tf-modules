@@ -87,7 +87,7 @@ resource "aws_security_group" "elb" {
 }
 resource "aws_elb" "elb" {
   name = "elb${var.environment}"
-  subnets = ["${var.eu-west-1a-public}", "${var.eu-west-1b-public}", "${var.eu-west-1c-public}"]
+  subnets = ["${var.subnet-1a-public}", "${var.subnet-1b-public}", "${var.subnet-1c-public}"]
   security_groups = ["${aws_security_group.elb.id}"]
   internal = false
 
@@ -120,8 +120,8 @@ resource "aws_elb" "elb" {
   connection_draining_timeout = 400
 
   tags {
-    Name = "${var.environment}"
-    Class = "${var.class}"
+    Name = "${var.elb-name}"
+    Class = "${var.elb-class}"
     Product ="${var.product}"
     Env = "${var.environment}"
   }
@@ -161,7 +161,7 @@ resource "aws_instance" "webcache-b" {
 
 resource "aws_route53_record" "varnish_route" {
    zone_id = "${var.zoneid}"
-   name = "${var.environment}.sys.comicrelief.com"
+   name = "${var.name_route_varnish}.sys.comicrelief.com"
    type = "CNAME"
    ttl = "300"
    records = ["${aws_elb.elb.dns_name}"]
