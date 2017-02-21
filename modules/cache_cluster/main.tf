@@ -1,9 +1,9 @@
-###########################
+k###########################
 # Memcache Cluster for ES #
 ###########################
 
 resource "aws_elasticache_cluster" "store" {
-    cluster_id = "clu${var.environment}" #cam rather than  as it can't be longer than 20 chars
+    cluster_id = "${var.cluster_id}" #cam rather than  as it can't be longer than 20 chars
     engine = "memcached"
     node_type = "${var.mc-instance_size}"
     port = 11211
@@ -12,7 +12,7 @@ resource "aws_elasticache_cluster" "store" {
     security_group_ids = ["${aws_security_group.store.id}"]
     subnet_group_name = "${aws_elasticache_subnet_group.store.name}"
     tags {
-      Name = "${var.environment}"
+      Name = "${var.name_ec}"
       Class = "cache"
       Product = "${var.product}"
       Env = "${var.environment}"
@@ -20,21 +20,21 @@ resource "aws_elasticache_cluster" "store" {
 }
 
 resource "aws_elasticache_subnet_group" "store" {
-    name = "memcache${var.environment}"
+    name = "${var.name_esg}"
     description = "Subnet group for rnd Memcache cluster"
     subnet_ids = ["${var.eu-west-1a-private}","${var.eu-west-1b-private}","${var.eu-west-1c-private}"]
 }
 
 resource "aws_route53_record" "store" {
    zone_id = "${var.zoneid}"
-   name = "${var.environment}"
+   name = "${var.name_rr}"
    type = "CNAME"
    ttl = "300"
    records = ["${aws_elasticache_cluster.store.cache_nodes.0.address}"]
 }
 
 resource "aws_security_group" "store" {
-  name = "${var.environment}"
+  name = "${var.name_sg}"
   description = "Allow SSH traffic from the internet"
 
   ingress {

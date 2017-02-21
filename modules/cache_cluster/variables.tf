@@ -64,3 +64,23 @@ variable "vpc_id" {
 variable "zoneid" {
   default = ""
 }
+
+variable "cluster_id" {
+  default = ""
+}
+
+variable "name_ec" {
+  default = ""
+}
+
+variable "name_rr" {
+  default = ""
+}
+
+variable "name_sg" {
+  default = ""
+}
+
+variable "name_esg" {
+  default = ""
+}
