@@ -99,10 +99,13 @@ variable "engine_version" {
 }
 
 variable "name_db_pg" {
-  default = ""
+  default = "dbpg"
 }
+
 variable "name_db_sbg" {
-  default = ""
-} variable "name_sg" {
-  default = ""
+  default = "dbcache"
+}
+
+variable "name_sg" {
+  default = "cachesg"
 }
