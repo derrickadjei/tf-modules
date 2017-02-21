@@ -85,3 +85,19 @@ variable "product" {
 variable "vpc_id" {
   default = ""
 }
+
+variable "identifier_id" {
+  default = "db"
+}
+
+variable "engine" {
+  default = ""
+}
+
+variable "engine_version" {
+  default = ""
+}
+
+variable "name_db_pg" {
+  default = ""
+}

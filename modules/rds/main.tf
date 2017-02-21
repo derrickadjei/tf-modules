@@ -3,11 +3,11 @@
 ########################
 
 resource "aws_db_instance" "db" {
-    identifier = "db${var.environment}"
+    identifier = "${var.identifier_id}"
     allocated_storage = "${var.db_storage}"
     storage_type = "${var.db_storage_type}"
-    engine = "mysql"
-    engine_version = "5.6"
+    engine = "${var.engine}"
+    engine_version = "${var.engine_version}"
     parameter_group_name = "${aws_db_parameter_group.db.name}"
     instance_class = "${var.db_instance_size}"
     name = "${var.db_name}"
@@ -18,7 +18,7 @@ resource "aws_db_instance" "db" {
 }
 
 resource "aws_db_parameter_group" "db" {
-    name = "db${var.environment}"
+    name = "${var.name_db_pg}"
     family = "mysql5.6"
     description = "RDS default parameter group"
 
