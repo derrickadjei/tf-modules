@@ -109,3 +109,7 @@ variable "name_db_sbg" {
 variable "name_sg" {
   default = "cachesg"
 }
+
+variable "name_rr" {
+  default = ""
+}
