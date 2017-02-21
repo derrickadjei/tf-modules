@@ -101,3 +101,8 @@ variable "engine_version" {
 variable "name_db_pg" {
   default = ""
 }
+variable "name_db_sbg" {
+  default = ""
+} variable "name_sg" {
+  default = ""
+}
