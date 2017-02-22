@@ -111,5 +111,5 @@ variable "name_sg" {
 }
 
 variable "name_rr" {
-  default = ""
+  default = "route"
 }
