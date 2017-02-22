@@ -66,21 +66,25 @@ variable "zoneid" {
 }
 
 variable "cluster_id" {
-  default = ""
+  default = "rndtest"
 }
 
 variable "name_ec" {
-  default = ""
+  default = "rndtest"
 }
 
 variable "name_rr" {
-  default = ""
-}
-
-variable "name_sg" {
-  default = ""
+  default = "test"
 }
 
 variable "name_esg" {
-  default = ""
+  default = "test"
+}
+
+variable "name_sg" {
+  default = "cachesg"
+}
+
+variable "name_rr" {
+  default = "route"
 }

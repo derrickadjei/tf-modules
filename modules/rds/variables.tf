@@ -105,11 +105,3 @@ variable "name_db_pg" {
 variable "name_db_sbg" {
   default = "dbcache"
 }
-
-variable "name_sg" {
-  default = "cachesg"
-}
-
-variable "name_rr" {
-  default = "route"
-}
