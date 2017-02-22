@@ -3,39 +3,21 @@ k###########################
 ###########################
 
 resource "aws_elasticache_cluster" "store" {
-    cluster_id = "rnd17-${var.environment}" #cam rather than rnd17 as it can't be longer than 20 chars
+    cluster_id = "${var.cluster_id}" #cam rather than  as it can't be longer than 20 chars
     engine = "memcached"
-    node_type = "${consul_keys.env.var.mc_instance_size}"
+    node_type = "${var.mc-instance_size}"
     port = 11211
     num_cache_nodes = 1
     parameter_group_name = "default.memcached1.4"
     security_group_ids = ["${aws_security_group.store.id}"]
     subnet_group_name = "${aws_elasticache_subnet_group.store.name}"
     tags {
-      Name = "rnd17-${var.environment}"
+      Name = "${var.name_ec}"
       Class = "cache"
-      Product = "rnd17"
+      Product = "${var.product}"
       Env = "${var.environment}"
     }
 }
-
-
-#resource "aws_elasticache_cluster" "store" {
-#    cluster_id = "${var.cluster_id}" #cam rather than  as it can't be longer than 20 chars
-#    engine = "memcached"
-#    node_type = "${var.mc-instance_size}"
-#    port = 11211
-#    num_cache_nodes = 1
-#    parameter_group_name = "default.memcached1.4"
-#    security_group_ids = ["${aws_security_group.store.id}"]
-#    subnet_group_name = "${aws_elasticache_subnet_group.store.name}"
-#    tags {
-#      Name = "${var.name_ec}"
-#      Class = "cache"
-#      Product = "${var.product}"
-#      Env = "${var.environment}"
-#    }
-#}
 
 resource "aws_elasticache_subnet_group" "store" {
     name = "${var.name_esg}"
