@@ -84,7 +84,3 @@ variable "name_esg" {
 variable "name_sg" {
   default = "cachesg"
 }
-
-variable "name_rr" {
-  default = "route"
-}
