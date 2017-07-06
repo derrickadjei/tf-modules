@@ -115,7 +115,7 @@ resource "aws_instance" "storage-c" {
   availability_zone = "eu-west-1c"
   instance_type = "${var.storage_instance_size}"
   key_name = "${var.aws_key_name}"
-  security_groups = ["${aws_security_group.storage.id}"]
+  security_groups = ["${aws_security_group.storage.id}"] #Come back to this and set the output for the subnets
   subnet_id = "${aws_subnet.eu-west-1c-private.id}"
   tags {
     Name = "storage-${var.environment}"

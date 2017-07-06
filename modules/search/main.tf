@@ -3,7 +3,7 @@
 ####################
 
 resource "aws_security_group" "search" {
-  name = "${var.environment}"
+  name = "${var.name_sg}"
   description = "Manage connections to search instances"
 
   ingress {
@@ -53,7 +53,7 @@ resource "aws_instance" "search" {
   security_groups = ["${aws_security_group.search.id}"]
   subnet_id = "${var.Eu-west-1a-private}"
   tags {
-    Name = "${var.environment}"
+    Name = "${var.search_name}"
     Class = "${var.Class}"
     Product = "${var.product}"
     Env = "${var.environment}"
